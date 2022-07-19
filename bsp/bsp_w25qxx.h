@@ -3,9 +3,9 @@
 
 #include "main.h"
 
-#define W25Q64
-#ifdef W25Q64
-    #define sFLASH_ID 0XEF4017 
+#define ZB25QV64
+#ifdef ZB25QV64
+    #define sFLASH_ID 0X5E16
 #endif
 
 #ifdef W25Q128

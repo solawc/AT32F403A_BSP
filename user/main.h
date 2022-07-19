@@ -11,6 +11,9 @@
 #include "at32f403a_407_clock.h"
 //#include "at32f403a_407_board.h"
 #include "bsp_uart.h"
+#include "bsp_spi.h"
+#include "bsp_w25qxx.h"
+
 
 
 

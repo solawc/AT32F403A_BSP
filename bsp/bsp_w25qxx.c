@@ -3,16 +3,18 @@
 uint32_t w25qxx_readID(void){
 
     uint8_t temp0 = 0,temp1 = 0,temp2 = 0;
-    uint32_t temp =0;
+    uint16_t temp =0;
 
     SPI_CS_LOW();
-    bsp_spi_senddata(W25X_JedecDeviceID);
-    temp0 = bsp_spi_readdata(Dummy_Byte);
-    temp1 = bsp_spi_readdata(Dummy_Byte);
-    temp2 = bsp_spi_readdata(Dummy_Byte);
+    bsp_spi_senddata(W25X_ManufactDeviceID);
+    bsp_spi_senddata(Dummy_Byte);
+    bsp_spi_senddata(Dummy_Byte);
+    bsp_spi_senddata(0x00);
+    temp0 = bsp_spi_readdata();
+    temp1 = bsp_spi_readdata();
     SPI_CS_HIGH();
 
-    temp = (temp0<<16)|(temp1<<8)|temp2;
+    temp = (temp0<<8)|(temp1);
     return temp;
 }
 
@@ -28,9 +30,7 @@ void w25qxx_wait_busy(void){
     
     SPI_CS_LOW();
     bsp_spi_senddata(W25X_ReadStatusReg);
-    while(bsp_spi_readdata() == WIP_Flag){
-
-    }
+    while((bsp_spi_readdata() & WIP_Flag ) == WIP_Flag);
     SPI_CS_HIGH();
 
 }
@@ -148,5 +148,5 @@ void w25qxx_readbuff(uint8_t  *pbuff,uint32_t addr,uint32_t numtoread){
         pbuff ++;
     }
     SPI_CS_HIGH();
-
+	
 }

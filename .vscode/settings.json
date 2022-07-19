@@ -5,6 +5,7 @@
         "stdio.h": "c",
         "at32f403a_407_board.h": "c",
         "main.h": "c",
-        "stdbool.h": "c"
+        "stdbool.h": "c",
+        "bsp_w25qxx.h": "c"
     }
 }
